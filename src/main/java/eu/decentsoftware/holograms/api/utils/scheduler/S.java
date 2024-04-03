@@ -15,7 +15,7 @@ public class S {
     private static final DecentHolograms DECENT_HOLOGRAMS = DecentHologramsAPI.get();
 
     public static void stopTask(int id) {
-        Bukkit.getScheduler().cancelTask(id);
+        DecentHologramsPlugin.getScheduler().cancelTask(id);
     }
 
     public static void async(Runnable runnable) {

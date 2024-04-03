@@ -62,4 +62,5 @@ processResources {
 shadowJar {
     relocate "org.bstats", "eu.decentsoftware.holograms.metrics"
     relocate "de.tr7zw.changeme.nbtapi", "eu.decentsoftware.holograms.libs.nbtapi"
+    relocate "fr.euphyllia.energie", "eu.decentsoftware.holograms.libs.energie"
 }
