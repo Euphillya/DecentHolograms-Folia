@@ -83,7 +83,10 @@ public abstract class ActionType {
 
             String string = String.join(" ", args);
             DecentHologramsPlugin.getScheduler().runTask(SchedulerType.SYNC, player, schedulerTaskInter -> {
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), PAPI.setPlaceholders(player, string.replace("{player}", player.getName())));
+                String papi = PAPI.setPlaceholders(player, string.replace("{player}", player.getName()));
+                DecentHologramsPlugin.getScheduler().runTask(SchedulerType.SYNC, globalTask -> {
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), papi);
+                });
             }, null);
             return true;
         }
