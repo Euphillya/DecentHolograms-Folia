@@ -14,6 +14,7 @@ import eu.decentsoftware.holograms.api.utils.items.DecentMaterial;
 import eu.decentsoftware.holograms.api.utils.location.LocationUtils;
 import eu.decentsoftware.holograms.api.utils.message.Message;
 import eu.decentsoftware.holograms.plugin.Validator;
+import fr.euphyllia.energie.utils.EntityUtils;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -1079,7 +1080,7 @@ public class HologramSubCommand extends DecentCommand {
 			return (sender, args) -> {
 				Hologram hologram = Validator.getHologram(args[0], Lang.HOLOGRAM_DOES_NOT_EXIST.getValue());
 				Player player = Validator.getPlayer(sender);
-				player.teleport(hologram.getLocation());
+				EntityUtils.teleportAsync(player, hologram.getLocation());
 
 				Lang.HOLOGRAM_TELEPORTED.send(sender);
 				return true;

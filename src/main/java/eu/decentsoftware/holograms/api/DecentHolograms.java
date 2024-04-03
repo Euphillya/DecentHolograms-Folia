@@ -90,18 +90,18 @@ public final class DecentHolograms {
         pm.registerEvents(new WorldListener(this), this.plugin);
 
         // Setup metrics
-        Metrics metrics = new Metrics(this.plugin, 12797);
-        metrics.addCustomChart(new SingleLineChart("holograms", () -> Hologram.getCachedHolograms().size()));
+        //Metrics metrics = new Metrics(this.plugin, 12797);
+        //metrics.addCustomChart(new SingleLineChart("holograms", () -> Hologram.getCachedHolograms().size()));
 
         // Setup update checker
         if (Settings.CHECK_FOR_UPDATES) {
-            UpdateChecker updateChecker = new UpdateChecker(getPlugin(), 96927);
+            /*UpdateChecker updateChecker = new UpdateChecker(getPlugin(), 96927);
             updateChecker.getVersion(ver -> {
                 if (Common.isVersionHigher(ver)) {
                     Lang.sendUpdateMessage(Bukkit.getConsoleSender());
                     this.updateAvailable = true;
                 }
-            });
+            });*/
         }
 
         BungeeUtils.init();

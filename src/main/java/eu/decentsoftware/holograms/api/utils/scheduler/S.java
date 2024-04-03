@@ -3,6 +3,9 @@ package eu.decentsoftware.holograms.api.utils.scheduler;
 import eu.decentsoftware.holograms.api.DecentHolograms;
 import eu.decentsoftware.holograms.api.DecentHologramsAPI;
 import eu.decentsoftware.holograms.api.utils.DExecutor;
+import eu.decentsoftware.holograms.plugin.DecentHologramsPlugin;
+import fr.euphyllia.energie.model.SchedulerTaskInter;
+import fr.euphyllia.energie.model.SchedulerType;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.IllegalPluginAccessException;
 import org.bukkit.scheduler.BukkitTask;
@@ -15,21 +18,9 @@ public class S {
         Bukkit.getScheduler().cancelTask(id);
     }
 
-    public static void sync(Runnable runnable) {
-        Bukkit.getScheduler().runTask(DECENT_HOLOGRAMS.getPlugin(), runnable);
-    }
-
-    public static BukkitTask sync(Runnable runnable, long delay) {
-        return Bukkit.getScheduler().runTaskLater(DECENT_HOLOGRAMS.getPlugin(), runnable, delay);
-    }
-
-    public static BukkitTask syncTask(Runnable runnable, long interval) {
-        return Bukkit.getScheduler().runTaskTimer(DECENT_HOLOGRAMS.getPlugin(), runnable, 0, interval);
-    }
-
     public static void async(Runnable runnable) {
         try {
-            Bukkit.getScheduler().runTaskAsynchronously(DECENT_HOLOGRAMS.getPlugin(), runnable);
+            DecentHologramsPlugin.getScheduler().runTask(SchedulerType.ASYNC, schedulerTaskInter -> runnable.run());
         } catch (IllegalPluginAccessException e) {
             DExecutor.execute(runnable);
         }
@@ -37,18 +28,18 @@ public class S {
 
     public static void async(Runnable runnable, long delay) {
         try {
-            Bukkit.getScheduler().runTaskLaterAsynchronously(DECENT_HOLOGRAMS.getPlugin(), runnable, delay);
+            DecentHologramsPlugin.getScheduler().runDelayed(SchedulerType.ASYNC, schedulerTaskInter -> runnable.run(), delay);
         } catch (IllegalPluginAccessException e) {
             DExecutor.execute(runnable);
         }
     }
 
-    public static BukkitTask asyncTask(Runnable runnable, long interval) {
-        return Bukkit.getScheduler().runTaskTimerAsynchronously(DECENT_HOLOGRAMS.getPlugin(), runnable, 0, interval);
+    public static SchedulerTaskInter asyncTask(Runnable runnable, long interval) {
+        return DecentHologramsPlugin.getScheduler().runAtFixedRate(SchedulerType.ASYNC, schedulerTaskInter -> runnable.run(), 0, interval);
     }
 
-    public static BukkitTask asyncTask(Runnable runnable, long interval, long delay) {
-        return Bukkit.getScheduler().runTaskTimerAsynchronously(DECENT_HOLOGRAMS.getPlugin(), runnable, delay, interval);
+    public static SchedulerTaskInter asyncTask(Runnable runnable, long interval, long delay) {
+        return DecentHologramsPlugin.getScheduler().runAtFixedRate(SchedulerType.ASYNC, schedulerTaskInter -> runnable.run(), delay, interval);
     }
 
 }
